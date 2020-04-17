@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Behavior.cs" />
     <Compile Include="Assets\Scripts\EnemyWalker.cs" />
     <Compile Include="Assets\Scripts\EntityDistanceChecker.cs" />
+    <Compile Include="Assets\Scripts\PlayerHitAnimation.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PosGiver.cs" />
     <Reference Include="Unity.Timeline.Editor">
