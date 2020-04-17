@@ -5,8 +5,8 @@ using UnityEngine;
 public class PosGiver : MonoBehaviour
 {
     [SerializeField]
-    EntityDistanceChecker check;
-    // Start is called before the first frame update
+    private EntityDistanceChecker check;
+
     void Start()
     {
         check.GetAllPlayers(gameObject);

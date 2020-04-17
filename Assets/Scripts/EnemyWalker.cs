@@ -4,39 +4,57 @@ using UnityEngine;
 
 public class EnemyWalker : MonoBehaviour
 {
-    Behavior.States behavior = Behavior.States.IDLE;
     [SerializeField]
-    EntityDistanceChecker check;
-    // Start is called before the first frame update
+    private float speed;
+
+    [SerializeField]
+    private EntityDistanceChecker check;
+
+    private GameObject target;
+    private Behavior.States behavior;
+
     void Start()
     {
-        Debug.Log(behavior);
-        behavior = Behavior.States.CHASE;
-        check.ChangeBehave += ChangeBehave;
-    }
+        KeepIdle();
 
-    // Update is called once per frame
+        check.SetTarget += SetTarget;
+        check.ChangeBehave += ChangeBehave;
+        check.KeepIdle += KeepIdle;
+    }
+    
     void Update()
     {
-       if(behavior == Behavior.States.CHASE)
-        {
+       if (behavior == Behavior.States.CHASE)
+       {
             Chase();
-        }
+       }
     }
+
     void Chase()
     {
-        Debug.Log("AAAAAA!!");
+        //Debug.Log("AAAAAA!!");
+        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
     }
+
     void ChangeBehave()
     {
-        if(behavior == Behavior.States.CHASE)
+        if (gameObject.name == "Player")
         {
             behavior = Behavior.States.EVADE;
-            Debug.Log(behavior);
-        } else if(behavior == Behavior.States.EVADE)
+        }
+        else if (gameObject.name == "Enemy")
         {
             behavior = Behavior.States.CHASE;
-            Debug.Log(behavior);
         }
+    }
+
+    private void SetTarget(GameObject obj)
+    {
+        target = obj;
+    }
+
+    void KeepIdle()
+    {
+        behavior = Behavior.States.IDLE;
     }
 }
